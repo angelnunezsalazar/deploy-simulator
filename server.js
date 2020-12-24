@@ -32,7 +32,7 @@ function run_script(command, callback) {
 
 
 const app = express();
-var appState="App is Running"
+var appState="Running"
 
 app.get('/', (req, res) => {
   res.send(`App State: ${appState}`);
@@ -41,8 +41,8 @@ app.get('/', (req, res) => {
 app.get('/deploy', (req, res) => {
   appState="Deploy in Progress";
   run_script("./deploy.sh", function(output, exit_code) {
-    appState="Finish Deployment. App is Running";
-    console.log("Deploy Finished.");
+    appState="Running";
+    console.log("Script Finished.");
     console.log('Exit Code: ' + exit_code);
     console.log('Full output of script: ',output);
   });
