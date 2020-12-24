@@ -29,8 +29,6 @@ function run_script(command, callback) {
   });
 }
 
-
-
 const app = express();
 var appState="RUNNING"
 
@@ -39,11 +37,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/deploy', (req, res) => {
-  appState="DEPLOY IN PROGRESS";
   if(appState=="DEPLOY IN PROGRESS"){
     res.send(`DEPLOY IN PROGRESS (you can't deploy now)`);
   }
   else{
+    appState="DEPLOY IN PROGRESS";
     run_script("./deploy.sh", function(output, exit_code) {
       appState="RUNNING";
       console.log("Script Finished.");
