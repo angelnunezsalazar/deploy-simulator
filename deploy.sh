@@ -1,8 +1,12 @@
 #!/bin/bash
-
 TAG_NAME=katu-portal-cache
-docker build -t $TAG_NAME /home/ec2-user/katu-portal
 
+echo "Updating Meta.json ..."
+node /home/ec2-user/katu-portal/update-build.js
+
+echo "Stoping existing container ..."
+
+docker build -t $TAG_NAME /home/ec2-user/katu-portal
 for runName in `docker ps | grep "$TAG_NAME" | awk '{print $1}'`
 do
     if [ "$runName" != "" ]
@@ -10,5 +14,6 @@ do
         docker stop $runName
     fi
 done
-echo "Executing container .."
+
+echo "Executing container ..."
 docker run --name $TAG_NAME --rm -d -p 80:3000 $TAG_NAME
