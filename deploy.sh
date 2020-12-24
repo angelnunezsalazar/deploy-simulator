@@ -2,7 +2,7 @@
 TAG_NAME=katu-portal-cache
 
 echo "Force Building container (don't use cache) ..."
-put /home/ec2-user/katu-portal/force-build.txt
+touch /home/ec2-user/katu-portal/force-build.txt
 
 echo "Building Container ..."
 
