@@ -10,4 +10,5 @@ do
         docker stop $runName
     fi
 done
+echo "Executing container .."
 docker run --name $TAG_NAME --rm -d -p 80:3000 $TAG_NAME
