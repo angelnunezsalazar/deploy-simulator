@@ -1,12 +1,15 @@
 #!/bin/bash
 TAG_NAME=katu-portal-cache
 
-echo "Updating Meta.json ..."
-node /home/ec2-user/katu-portal/update-build.js
+echo "Force Building container (don't use cache) ..."
+put /home/ec2-user/katu-portal/force-build.txt
+
+echo "Building Container ..."
+
+docker build -t $TAG_NAME /home/ec2-user/katu-portal
 
 echo "Stoping existing container ..."
 
-docker build -t $TAG_NAME /home/ec2-user/katu-portal
 for runName in `docker ps | grep "$TAG_NAME" | awk '{print $1}'`
 do
     if [ "$runName" != "" ]
