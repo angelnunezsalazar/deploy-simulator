@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
 
 app.get('/deploy', (req, res) => {
   appState="Deploy in Progress";
-  run_script("./deploy.sj", function(output, exit_code) {
+  run_script("./deploy.sh", function(output, exit_code) {
     appState="Finish Deployment. App is Running";
     console.log("Deploy Finished.");
     console.log('Exit Code: ' + exit_code);
