@@ -40,13 +40,18 @@ app.get('/', (req, res) => {
 
 app.get('/deploy', (req, res) => {
   appState="DEPLOY IN PROGRESS";
-  run_script("./deploy.sh", function(output, exit_code) {
-    appState="RUNNING";
-    console.log("Script Finished.");
-    console.log('Exit Code: ' + exit_code);
-    console.log('Full output of script: ',output);
-  });
-  res.send(`Deploying new Version (it will take 2 minutes). Check App State in '/'`);
+  if(appState=="DEPLOY IN PROGRESS"){
+    res.send(`DEPLOY IN PROGRESS (you can't deploy now)`);
+  }
+  else{
+    run_script("./deploy.sh", function(output, exit_code) {
+      appState="RUNNING";
+      console.log("Script Finished.");
+      console.log('Exit Code: ' + exit_code);
+      console.log('Full output of script: ',output);
+    });
+    res.send(`DEPLOYING NEW VERSION ... (it will take 2 minutes). Check App State in '/'`);
+  }
 });
 
 const PORT = 9090;
