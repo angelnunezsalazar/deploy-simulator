@@ -48,7 +48,7 @@ app.get('/deploy', (req, res) => {
       console.log('Exit Code: ' + exit_code);
       console.log('Full output of script: ',output);
     });
-    res.send("DEPLOYING NEW VERSION ... (it will take 2 minutes). Check App State in '/'");
+    res.send("DEPLOYING NEW VERSION ... (it will take 3 minutes). Check App State in '/'");
   }
 });
 
