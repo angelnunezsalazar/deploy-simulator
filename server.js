@@ -10,7 +10,7 @@ function run_script(command, callback) {
 
   child.stdout.setEncoding('utf8');
   child.stdout.on('data', function(data) {
-      console.log('stdout: ' + data);
+      console.log(data);
 
       data=data.toString();
       scriptOutput+=data;
@@ -32,16 +32,16 @@ function run_script(command, callback) {
 
 
 const app = express();
-var appState="Running"
+var appState="RUNNING"
 
 app.get('/', (req, res) => {
   res.send(`App State: ${appState}`);
 });
 
 app.get('/deploy', (req, res) => {
-  appState="Deploy in Progress";
+  appState="DEPLOY IN PROGRESS";
   run_script("./deploy.sh", function(output, exit_code) {
-    appState="Running";
+    appState="RUNNING";
     console.log("Script Finished.");
     console.log('Exit Code: ' + exit_code);
     console.log('Full output of script: ',output);
