@@ -6,7 +6,7 @@ date +%s > /home/ec2-user/katu-portal/force-build.txt
 
 echo "Building Container ..."
 
-docker build -t $TAG_NAME /home/ec2-user/katu-portal
+docker build --build-arg ENVIRONMENT=test -t $TAG_NAME /home/ec2-user/katu-portal
 
 echo "Stoping existing container ..."
 

@@ -38,17 +38,17 @@ app.get('/', (req, res) => {
 
 app.get('/deploy', (req, res) => {
   if(appState=="DEPLOY IN PROGRESS"){
-    res.send(`DEPLOY IN PROGRESS (you can't deploy now)`);
+    res.send("DEPLOY IN PROGRESS (you can't deploy now). Check App State in '/'");
   }
   else{
     appState="DEPLOY IN PROGRESS";
     run_script("./deploy.sh", function(output, exit_code) {
       appState="RUNNING";
-      console.log("Script Finished.");
+      console.log('Script Finished.');
       console.log('Exit Code: ' + exit_code);
       console.log('Full output of script: ',output);
     });
-    res.send(`DEPLOYING NEW VERSION ... (it will take 2 minutes). Check App State in '/'`);
+    res.send("DEPLOYING NEW VERSION ... (it will take 2 minutes). Check App State in '/'");
   }
 });
 
