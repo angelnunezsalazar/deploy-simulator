@@ -46,7 +46,7 @@ app.get('/deploy', (req, res) => {
     console.log('Exit Code: ' + exit_code);
     console.log('Full output of script: ',output);
   });
-  res.send('Deploying new Version. Check new version in meta.json');
+  res.send(`Deploying new Version (it will take 2 minutes). Check App State in '/'`);
 });
 
 const PORT = 9090;
