@@ -1,12 +1,13 @@
 #!/bin/bash
-TAG_NAME=katu-portal-cache
+APPLICATION=$1
+TAG_NAME=$APPLICATION-cache
 
 echo "Force Building container (don't use cache) ..."
-date +%s > /home/ec2-user/katu-portal/force-build.txt
+date +%s > /home/ec2-user/$APPLICATION/force-build.txt
 
 echo "Building Container ..."
 
-docker build --build-arg ENVIRONMENT=test -t $TAG_NAME /home/ec2-user/katu-portal
+docker build --build-arg ENVIRONMENT=test -t $TAG_NAME /home/ec2-user/$APPLICATION
 
 echo "Stoping existing container ..."
 
