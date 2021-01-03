@@ -2,9 +2,9 @@
 const express = require('express');
 var child_process = require('child_process');
 
-function run_script(command, callback) {
+function run_script(command, args, callback) {
   console.log("Starting Process.");
-  var child = child_process.spawn(command);
+  var child = child_process.spawn(command,[args]);
 
   var scriptOutput = "";
 
@@ -42,7 +42,7 @@ app.get('/deploy-portal', (req, res) => {
   }
   else{
     appState="DEPLOY IN PROGRESS";
-    run_script("./deploy.sh katu-portal", function(output, exit_code) {
+    run_script("./deploy.sh", "katu-portal", function(output, exit_code) {
       appState="RUNNING";
       console.log('Script Finished.');
       console.log('Exit Code: ' + exit_code);
@@ -58,7 +58,7 @@ app.get('/deploy-backoffice', (req, res) => {
   }
   else{
     appState="DEPLOY IN PROGRESS";
-    run_script("./deploy.sh katu-backoffice", function(output, exit_code) {
+    run_script("./deploy.sh","katu-backoffice", function(output, exit_code) {
       appState="RUNNING";
       console.log('Script Finished.');
       console.log('Exit Code: ' + exit_code);
