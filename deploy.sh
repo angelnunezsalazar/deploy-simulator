@@ -23,7 +23,7 @@ echo "Executing container ..."
 
 case $APPLICATION in
 katu-portal) docker run --name $TAG_NAME --rm -d -p 80:3000 $TAG_NAME ;;
-test) docker run --name $TAG_NAME --rm -d -p 90:8080 $TAG_NAME ;;
+katu-backoffice) docker run --name $TAG_NAME --rm -d -p 90:8080 $TAG_NAME ;;
 *)echo "Application doesn't exist"; exit 1 ;;
 esac
 
