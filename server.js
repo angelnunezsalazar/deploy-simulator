@@ -36,13 +36,29 @@ app.get('/', (req, res) => {
   res.send(`App State: ${appState}`);
 });
 
-app.get('/deploy', (req, res) => {
+app.get('/deploy-portal', (req, res) => {
   if(appState=="DEPLOY IN PROGRESS"){
     res.send("DEPLOY IN PROGRESS (you can't deploy now). Check App State in '/'");
   }
   else{
     appState="DEPLOY IN PROGRESS";
-    run_script("./deploy.sh", function(output, exit_code) {
+    run_script("./deploy.sh katu-portal", function(output, exit_code) {
+      appState="RUNNING";
+      console.log('Script Finished.');
+      console.log('Exit Code: ' + exit_code);
+      console.log('Full output of script: ',output);
+    });
+    res.send("DEPLOYING NEW VERSION ... (it will take 3 minutes). Check App State in '/'");
+  }
+});
+
+app.get('/deploy-backoffice', (req, res) => {
+  if(appState=="DEPLOY IN PROGRESS"){
+    res.send("DEPLOY IN PROGRESS (you can't deploy now). Check App State in '/'");
+  }
+  else{
+    appState="DEPLOY IN PROGRESS";
+    run_script("./deploy.sh katu-backoffice", function(output, exit_code) {
       appState="RUNNING";
       console.log('Script Finished.');
       console.log('Exit Code: ' + exit_code);
